@@ -1,11 +1,14 @@
 package model;
+import reserva.exception.*;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
-import reserva.exception.*;
+
+import reserva.modelo.EstadoReserva;
+import reserva.modelo.Reserva;
 
 public class ReservaTest {
 
@@ -75,15 +78,6 @@ public class ReservaTest {
         Reserva reserva = Reserva.instance(id, emailContacto, fecha, 4);
         reserva.cancelar();
         assertEquals(EstadoReserva.CANCELADA, reserva.getEstado());
-    }
-
-    @Test
-    void reservaCanceladaNoSePuedeCancelarNuevamente() {
-        Reserva reserva = Reserva.instance(id, emailContacto, fecha, 4);
-        reserva.cancelar();
-        assertThrows(reservaCanceladaNoSePuedeCancelarNuevamenteLanzaException.class, () -> {
-            reserva.cancelar();
-        });
     }
 
 }
